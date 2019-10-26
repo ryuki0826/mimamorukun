@@ -104,6 +104,7 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.4-x64-mingw32)
       mini_portile2 (~> 2.4.0)
+    pg (1.1.4-x64-mingw32)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -205,6 +206,7 @@ DEPENDENCIES
   duktape
   jbuilder (~> 2.5)
   nokogiri
+  pg
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.3)
