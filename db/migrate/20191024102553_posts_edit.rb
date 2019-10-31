@@ -1,5 +1,5 @@
 class PostsEdit < ActiveRecord::Migration[5.2]
   def change
-    change_column :Posts, :zaiko, :boolean
+    change_column :posts, :zaiko, :boolean
   end
 end
