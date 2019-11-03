@@ -64,10 +64,22 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "sample_app_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  #20191102追加　SendGridのSMTP設定
+  config.action_mailer.default_url_options = { host: 'mimamorukun.herokuapp.com' }
+  config.action_mailer.smtp_settings = {
+  user_name: ENV['SENDGRID_USERNAME'],
+  password: ENV['SENDGRID_PASSWORD'],
+  domain: 'herokuapp.com',
+  address: 'smtp.sendgrid.net',
+  port: 587,
+  authentication: :plain,
+  enable_starttls_auto: true
+}
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
