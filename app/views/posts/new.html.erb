@@ -1,6 +1,6 @@
 <div class="main posts-new">
   <div class="container">
-    <h1 class="form-heading">投稿する</h1>
+    <h1 class="form-heading">監視サイト登録</h1>
     <%= form_tag("/posts/create") do %>
       <div class="form">
         <div class="form-body">
@@ -10,8 +10,12 @@
             </div>
           <% end %>
           
-          <textarea name="content"><%= @post.content %></textarea>
-          <input type="submit" value="投稿">
+          <p>サイトURL</p>
+          <input name="url" value="<%= @post.url %>">
+          <p>在庫切れキーワード</p>
+          <input name="content" value="<%= @post.content %>">
+          <!--<textarea name="content"><%= @post.content %></textarea>-->
+          <input type="submit" value="登録">
         </div>
       </div>
     <% end %>

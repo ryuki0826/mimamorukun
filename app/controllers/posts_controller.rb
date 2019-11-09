@@ -7,8 +7,9 @@ class PostsController < ApplicationController
 
 
   def index
+    #@posts = Post.all.order(created_at: :desc)
     @posts = Post.all.order(created_at: :desc)
-  
+    @posts=Post.where(user_id: @current_user.id)
   end
   
   def show
@@ -24,11 +25,12 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(
+      url: params[:url],
       content: params[:content],
       user_id: @current_user.id
     )
     if @post.save
-      flash[:notice] = "投稿を作成しました"
+      flash[:notice] = "監視サイト登録しました"
       redirect_to("/posts/index")
     else
       render("posts/new")
@@ -41,9 +43,11 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find_by(id: params[:id])
+
     @post.content = params[:content]
+    @post.url= params[:url]
     if @post.save
-      flash[:notice] = "投稿を編集しました"
+      flash[:notice] = "監視サイト情報を編集しました"
       redirect_to("/posts/index")
     else
       render("posts/edit")
@@ -53,7 +57,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.destroy
-    flash[:notice] = "投稿を削除しました"
+    flash[:notice] = "監視登録を削除しました"
     redirect_to("/posts/index")
   end
   

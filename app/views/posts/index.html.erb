@@ -1,20 +1,31 @@
 <div class="main posts-index">
-  <div class="container">
-    <% @posts.each do |post| %>
-      <div class="posts-index-item">
-        <!--<div class="post-left">
-          
-          <img src="<%= "/user_images/#{post.user.image_name}" %>">
 
-        </div> -->
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= post.url %>
-            <%= link_to(post.user.name, "/users/#{post.user.id}") %>
-          </div>
-          <%= link_to(post.content, "/posts/#{post.id}") %>
-        </div>
-      </div>
+  <div class="container">
+ 
+     <div class="col-12">
+     <div class="card">
+            <div class="card-header">監視サイト一覧</div>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>URL</th>
+                    <th>在庫切れキーワード</th>
+                    <th>編集</th>
+                    <th>削除</th>
+                </tr>
+            </thead>
+            <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+                    <td><%=post.url %></td>
+                    <td><%=post.content%></td>
+                    <td><%=link_to("編集", "/posts/#{post.id}/edit")%></td>
+                    <td> <%= link_to("削除", "/posts/#{post.id}/destroy", {method: "post"}) %></td>
+      </tr>
     <% end %>
+            </tbody>
+        </table>
+    </div>
+    </div>
   </div>
 </div>
