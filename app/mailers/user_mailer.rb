@@ -5,9 +5,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.zaiko_check.subject
   #
-  def zaiko_check(user)
+  def zaiko_check(user,message)
     @user=user
-    
-    mail to: "#{@user.email}",subject: "Hello,#{@user.name}"
+    @message =message
+    mail to: "#{@user.email}",subject: "【みまもるくん】在庫状況のお知らせ"
   end
 end

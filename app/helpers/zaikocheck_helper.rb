@@ -1,0 +1,2 @@
+module ZaikocheckHelper
+end

@@ -3,9 +3,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
-  #スクレイピング用読み込み
-  require 'nokogiri'
-  require 'open-uri'
+  
 
 
   def index
@@ -67,22 +65,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def scraping
-    # 対象のURL
-    url = "https://item.mercari.com/jp/m52572091689/"
-    url2 ="https://item.mercari.com/jp/m52086832821"
-    keyword="購入画面に進む"
-    keyword2="売り切れました"
-    # NokogiriでURLの情報を取得する
-    @contents_url = Nokogiri::HTML(open(url),nil,"utf-8")
-    @contents_url2 = Nokogiri::HTML(open(url2),nil,"utf-8")
- 
-    #puts @contents_url.content
-    puts @contents_url.content.include?(keyword)
-    puts @contents_url.content.include?(keyword2)
-    puts @contents_url2.content.include?(keyword)
-    puts @contents_url2.content.include?(keyword2)
   
-  end
   
 end
