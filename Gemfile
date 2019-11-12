@@ -28,6 +28,10 @@ gem 'ruby-debug-ide'
 gem 'debase'
 gem 'nokogiri'
 
+#20191111管理画面追加,認証機能
+gem 'rails_admin', '~> 1.3'
+gem 'cancancan', '~> 2.0'
+gem 'devise'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
