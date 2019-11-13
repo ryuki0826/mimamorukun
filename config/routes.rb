@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  #devise_for :users
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # post "likes/:post_id/create" => "likes#create"
   # post "likes/:post_id/destroy" => "likes#destroy"
