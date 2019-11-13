@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   before_action :authenticate_user
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
   
-
+   #スクレイピング用読み込み
+   require 'nokogiri'
+   require 'open-uri'
 
   def index
     #@posts = Post.all.order(created_at: :desc)
@@ -29,12 +31,37 @@ class PostsController < ApplicationController
       content: params[:content],
       user_id: @current_user.id
     )
-    if @post.save
-      flash[:notice] = "監視サイト登録しました"
-      redirect_to("/posts/index")
+    #サイト読み取り異常の場合　登録不可のメッセージ追加
+    if sitecheck(@post.url)
+    
+      if @post.save
+        flash[:notice] = "監視サイト登録しました"
+        redirect_to("/posts/index")
+      else
+        render("posts/new")
+      end
+
     else
-      render("posts/new")
+
+      flash[:notice] = "ＵＲＬが不適切かそのサイトからアクセスブロックされているため登録できません"
+      redirect_to("/posts/index")
     end
+  end
+  
+  #読み込みエラーが発生したときのみfalse返す
+  def sitecheck(url)
+    judge=true
+
+    url_ob=URI::parse(url)
+    begin
+        #HTTPEROORが発生した場合のエラー処理
+        page=url_ob.read("user-agent"=>"aaaa")
+    rescue
+
+      judge=false
+    end
+
+    return judge
   end
   
   def edit
@@ -68,6 +95,8 @@ class PostsController < ApplicationController
       redirect_to("/posts/index")
     end
   end
+
+
 
   
   

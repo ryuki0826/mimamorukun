@@ -22,7 +22,7 @@ class ZaikocheckController < ApplicationController
                     #HTTPEROORが発生した場合のエラー処理
                     page=url_ob.read("user-agent"=>"aaaa")
                 rescue
-                    
+
                     next
                 end
                     @contents_url = Nokogiri::HTML::parse(page)
@@ -52,40 +52,5 @@ class ZaikocheckController < ApplicationController
 
     end
 
-    # def scraping(user)
-    #     # ユーザーの登録サイトの数だけ繰り返す
-    #     urls=Post.where(user_id: user.id)
-    #     text_url= ""
-    #     i=0
-    #     urls.each do |url|
-    #         r_item=Post.find_by(url: url.url)
-    #         keyword=r_item.content
-        
-    #         @contents_url = Nokogiri::HTML(open(r_item.url),nil,"utf-8")
-           
-    #         if @contents_url.content.include?(keyword)
-    #             r_item.zaiko=false
-    #             text_url << r_item.url
-    #             text_url << "\n"
-    #             i+=1
-    #         else
-    #             r_item.zaiko=true
-    #         end
-            
-           
-    #     #変更内容を更新
-    #     r_item.save     
-    #     end
-
-    #     return "在庫切れは#{i}件ありました\n#{text_url}"+"\n" 
-        
-
-        
-
-      
-        
-      
-
-    # end
-
+   
 end
