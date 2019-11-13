@@ -6,17 +6,22 @@ require 'open-uri'
 
     #ユーザーが登録しているサイトをスクレイピングして、在庫状況を確認
     #在庫有りの場合true 無の場合 falseを入力
-    def scraping(user)
+def scraping(user)
         # ユーザーの登録サイトの数だけ繰り返す
         urls=Post.where(user_id: user.id)
         text_url= ""
         i=0
+    begin
         urls.each do |url|
             r_item=Post.find_by(url: url.url)
             keyword=r_item.content
         
             url_ob=URI::parse(url.url)
+            #HTTPEROORが発生した場合のエラー処理
             page=url_ob.read("user-agent"=>"aaaa")
+    rescue
+        
+        retry
             @contents_url = Nokogiri::HTML::parse(page)
            
             #@contents_url = Nokogiri::HTML(open(r_item.url),nil,"utf-8")
@@ -35,10 +40,14 @@ require 'open-uri'
         r_item.save     
         end
 
+    end
+
+    
+
         return "在庫切れは#{i}件ありました\n#{text_url}"+"\n" 
     
 
-    end
+end
 
     # def scraping(user)
     #     # ユーザーの登録サイトの数だけ繰り返す
