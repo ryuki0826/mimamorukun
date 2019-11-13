@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@gmail.com'
+  #1113 送信元変更
+  default from: 'mimamorukunn2@gmail.com'
   layout 'mailer'
 end
