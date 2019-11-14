@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_025606) do
+ActiveRecord::Schema.define(version: 2019_11_14_070102) do
 
   create_table "Posts", force: :cascade do |t|
     t.text "content"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_025606) do
     t.integer "user_id"
     t.boolean "zaiko"
     t.string "url"
+    t.text "content2"
   end
 
   create_table "likes", force: :cascade do |t|

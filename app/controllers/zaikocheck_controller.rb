@@ -16,6 +16,8 @@ class ZaikocheckController < ApplicationController
                 
                     r_item=Post.find_by(url: url.url)
                     keyword=r_item.content
+                    keyword2=r_item.content2
+                    keyword2=keyword if keyword2.nil? #複数キーワード対応　もっと良い方法ありそう
                 
                     url_ob=URI::parse(url.url)
                 begin
@@ -29,7 +31,7 @@ class ZaikocheckController < ApplicationController
                 
                     #@contents_url = Nokogiri::HTML(open(r_item.url),nil,"utf-8")
                 
-                    if @contents_url.content.include?(keyword)
+                    if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
                         r_item.zaiko=false
                         text_url << r_item.url
                         text_url << "\n"

@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
-  validates :content, {presence: true, length: {maximum: 140}}
+  validates :content, {presence: true, length: {maximum: 50}}
+  validates :content2, {length: {maximum: 50}}
+  
   validates :user_id, {presence: true}
   
   def user

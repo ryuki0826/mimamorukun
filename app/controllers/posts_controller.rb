@@ -29,6 +29,7 @@ class PostsController < ApplicationController
     @post = Post.new(
       url: params[:url],
       content: params[:content],
+      content2: params[:content2],
       user_id: @current_user.id
     )
     #サイト読み取り異常の場合　登録不可のメッセージ追加
