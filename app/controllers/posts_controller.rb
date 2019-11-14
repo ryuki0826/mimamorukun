@@ -73,6 +73,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
 
     @post.content = params[:content]
+    @post.content2 = params[:content2]
     @post.url= params[:url]
     if @post.save
       flash[:notice] = "監視サイト情報を編集しました"
