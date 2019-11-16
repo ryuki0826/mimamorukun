@@ -18,7 +18,7 @@
             <tbody>
     <% @posts.each do |post| %>
       <tr>
-                    <td><%=post.url %></td>
+                    <td><%=text_url_to_link(post.url).html_safe %></td>
                     <td><%=post.content%></td>
                     <td><%=post.content2%></td>
                     <td><%=link_to("編集", "/posts/#{post.id}/edit")%></td>
