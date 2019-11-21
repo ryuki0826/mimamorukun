@@ -3,7 +3,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
-  
+  protect_from_forgery :except => ["create"]
    #スクレイピング用読み込み
    require 'nokogiri'
    require 'open-uri'
@@ -96,6 +96,43 @@ class PostsController < ApplicationController
       flash[:notice] = "権限がありません"
       redirect_to("/posts/index")
     end
+  end
+
+  def import
+
+    # Post.import(params[:file])
+    err_url=""
+    CSV.foreach(params[:file].path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      @post=Post.new(url: row['url'],
+                  content: row['content'],
+                  content2: row['content2'],
+                  user_id: @current_user.id)
+
+      if sitecheck(@post.url)
+
+          @post.save
+          # flash[:notice] = "監視サイト登録しました"
+          # redirect_to("/posts/index")
+        # else
+        #   # render("posts/new")
+        # end
+      else
+  
+          err_url=err_url + @post.url + "\n"
+        
+        # redirect_to("/posts/index")
+      end
+      # post.attributes = row.to_hash.slice(*updatable_attributes)
+
+      # post.save!
+    end
+    
+    if err_url == ""
+      flash[:notice] = "登録完了しました"
+    else
+      flash[:notice] = "#{err_url}においてＵＲＬが不適切かそのサイトからアクセスブロックされているため登録できませんでした"
+    end
+     redirect_to("/posts/index")
   end
 
 

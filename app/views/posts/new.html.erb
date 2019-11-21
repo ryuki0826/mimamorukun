@@ -1,6 +1,6 @@
 <div class="main posts-new">
   <div class="container">
-    <h1 class="form-heading">監視サイト登録</h1>
+    <h1 class="form-heading">個別登録</h1>
     <%= form_tag("/posts/create") do %>
       <div class="form">
         <div class="form-body">
@@ -18,8 +18,20 @@
           <input name="content2" value="<%= @post.content2 %>">
           <!--<textarea name="content"><%= @post.content %></textarea>-->
           <input type="submit" value="登録">
+
+          
         </div>
       </div>
+    <% end %>
+
+    <h1 class="form-heading">一括登録</h1>
+    <%= form_tag({controller: "posts", action: "import", method: "post"}, {multipart: true}) do %>
+    <div class="form">
+        <div class="form-body">
+          <%= file_field_tag :file %>
+          <%= submit_tag "一括登録" %>
+        </div>
+    </div>
     <% end %>
   </div>
 </div>
