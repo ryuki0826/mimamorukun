@@ -110,7 +110,12 @@ class PostsController < ApplicationController
 
       if sitecheck(@post.url)
 
-          @post.save
+          if @post.save
+            
+          else
+            err_url=err_url + @post.url + "\n"
+          end
+
           # flash[:notice] = "監視サイト登録しました"
           # redirect_to("/posts/index")
         # else
@@ -130,11 +135,15 @@ class PostsController < ApplicationController
     if err_url == ""
       flash[:notice] = "登録完了しました"
     else
-      flash[:notice] = "#{err_url}においてＵＲＬが不適切かそのサイトからアクセスブロックされているため登録できませんでした"
+      flash[:notice] = "#{err_url}においてＵＲＬ,キーワードが不適切かそのサイトからアクセスブロックされているため登録できませんでした"
     end
      redirect_to("/posts/index")
   end
 
+  def download
+    download_file_name = "public/example.csv"
+    send_file download_file_name
+  end
 
 
   

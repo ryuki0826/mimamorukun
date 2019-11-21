@@ -26,10 +26,15 @@ Rails.application.routes.draw do
   post "posts/:id/update" => "posts#update"
   post "posts/:id/destroy" => "posts#destroy"
 
-   #objects に限り、post で import 処理を許可する
+   #post で import 処理を許可する
    resources 'posts', only: :import do
     collection { post :import }
   end
+  #ダウンロード
+  get 'download', to: 'posts#download'
+
+
+
 
   get "/" => "home#top"
   get "about" => "home#about"

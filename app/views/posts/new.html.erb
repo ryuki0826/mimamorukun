@@ -30,8 +30,12 @@
         <div class="form-body">
           <%= file_field_tag :file %>
           <%= submit_tag "一括登録" %>
+          
         </div>
+          
     </div>
+     
     <% end %>
+    <%= button_to '一括登録用のCSVファイルのダウンロードはこちら', download_path, method: :get, class: "btn btn-default" %>
   </div>
 </div>
