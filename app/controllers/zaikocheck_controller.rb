@@ -28,7 +28,7 @@ class ZaikocheckController < ApplicationController
                     page=url_ob.read("user-agent"=>"aaaa")
                     @contents_url = Nokogiri::HTML::parse(page)
                 rescue
-                    p url.url
+                    
 
                     next
                 end
@@ -45,7 +45,6 @@ class ZaikocheckController < ApplicationController
                     url.zaiko=true
                 end
 
-                p url.url
                 #変更内容を更新
                 if url.save
                 else
