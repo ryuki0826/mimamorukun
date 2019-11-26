@@ -17,7 +17,7 @@ class ZaikocheckController < ApplicationController
                     r_item=Post.find_by(url: url.url)
                     keyword=r_item.content
                     keyword2=r_item.content2
-                    keyword2=keyword if keyword2.nil? #複数キーワード対応　もっと良い方法ありそう
+                    keyword2=keyword if keyword2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
                 
                     url_ob=URI::parse(url.url)
                 begin
