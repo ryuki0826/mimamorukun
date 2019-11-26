@@ -9,41 +9,53 @@ class ZaikocheckController < ApplicationController
     def scraping(user)
             # ユーザーの登録サイトの数だけ繰り返す
             urls=Post.where(user_id: user.id)
+           
+        
             text_url= ""
             i=0
         
             urls.each do |url|
-                
-                    r_item=Post.find_by(url: url.url)
-                    keyword=r_item.content
-                    keyword2=r_item.content2
-                    keyword2=keyword if keyword2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
-                
-                    url_ob=URI::parse(url.url)
+                    
+                    
+                    # url=Post.find_by(url: url.url)
+                    url.content2=url.content if url.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
+                    keyword=url.content
+                    keyword2=url.content2                
+                    
                 begin
                     #HTTPEROORが発生した場合のエラー処理
+                    url_ob=URI::parse(url.url)
                     page=url_ob.read("user-agent"=>"aaaa")
+                    @contents_url = Nokogiri::HTML::parse(page)
                 rescue
+                    p url.url
 
                     next
                 end
-                    @contents_url = Nokogiri::HTML::parse(page)
-                
-                    #@contents_url = Nokogiri::HTML(open(r_item.url),nil,"utf-8")
-                
-                    if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
-                        r_item.zaiko=false
-                        text_url << r_item.url
-                        text_url << "\n"
-                        i+=1
-                    else
-                        r_item.zaiko=true
-                    end
                     
-            
-            #変更内容を更新
-            r_item.save     
+                
+                    #@contents_url = Nokogiri::HTML(open(url.url),nil,"utf-8")
+                
+                if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
+                    url.zaiko=false
+                    text_url << url.url
+                    text_url << "\n"
+                    i+=1
+                else
+                    url.zaiko=true
+                end
+
+                p url.url
+                #変更内容を更新
+                if url.save
+                else
+                    p url.url
+                end
+           
             end
+
+            
+           
 
         
 
