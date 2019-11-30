@@ -33,7 +33,7 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
     #サイト読み取り異常の場合　登録不可のメッセージ追加
-    if sitecheck(@post.url)
+    if sitecheck(@post)
     
       if @post.save
         flash[:notice] = "監視サイト登録しました"
@@ -53,16 +53,28 @@ class PostsController < ApplicationController
   def sitecheck(url)
     judge=true
 
-    url_ob=URI::parse(url)
     begin
         #HTTPEROORが発生した場合のエラー処理
+        url_ob=URI::parse(url.url)
         page=url_ob.read("user-agent"=>"aaaa")
+        @contents_url = Nokogiri::HTML::parse(page)
+        url.content2=url.content if url.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
+        keyword=url.content
+        keyword2=url.content2                
+                  
+        if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
+          url.zaiko=false
+        else
+          url.zaiko=true
+        end
     rescue
 
       judge=false
     end
 
     return judge
+
+
   end
   
   def edit
@@ -147,9 +159,9 @@ class PostsController < ApplicationController
 
   def convert(flag)
     if flag
-      "〇"
+      "なし"
     else
-      "×"
+      "あり"
     end
   end
 
