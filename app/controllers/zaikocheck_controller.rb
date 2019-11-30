@@ -60,7 +60,7 @@ class ZaikocheckController < ApplicationController
 
         
 
-            return "在庫切れは#{i}件ありました\n#{text_url}"+"\n" 
+            return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n" 
         
 
     end
