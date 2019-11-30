@@ -11,6 +11,7 @@
                     <th>URL</th>
                     <th>在庫切れキーワード</th>
                     <th>在庫切れキーワード2</th>
+                     <th>在庫状況</th>
                     <th>編集</th>
                     <th>削除</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <td><%=text_url_to_link(post.url).html_safe %></td>
                     <td><%=post.content%></td>
                     <td><%=post.content2%></td>
+                    <td><%=convert(post.zaiko)%></td> 
                     <td><%=link_to("編集", "/posts/#{post.id}/edit")%></td>
                     <td> <%= link_to("削除", "/posts/#{post.id}/destroy", {method: "post"}) %></td>
       </tr>

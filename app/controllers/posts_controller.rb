@@ -145,7 +145,14 @@ class PostsController < ApplicationController
     send_file download_file_name
   end
 
+  def convert(flag)
+    if flag
+      "〇"
+    else
+      "×"
+    end
+  end
 
-  
+  helper_method :convert
   
 end
