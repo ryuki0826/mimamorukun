@@ -20,8 +20,8 @@
     <% @posts.each do |post| %>
       <tr>
                     <td><%=text_url_to_link(post.url).html_safe %></td>
-                    <td><%=post.content%></td>
-                    <td><%=post.content2%></td>
+                    <td><%=post.content.truncate(50)%></td>
+                    <td><%=post.content2.truncate(50)%></td>
                     <td><%=convert(post.zaiko)%></td> 
                     <td><%=link_to("編集", "/posts/#{post.id}/edit")%></td>
                     <td> <%= link_to("削除", "/posts/#{post.id}/destroy", {method: "post"}) %></td>

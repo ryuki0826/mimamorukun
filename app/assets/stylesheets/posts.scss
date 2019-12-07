@@ -33,6 +33,9 @@
   padding-left: 25px;
   text-align: left;
 }
+table td {
+  word-break : break-all;
+}
 
 /* posts/show ================================ */
 .posts-show form {

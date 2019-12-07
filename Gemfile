@@ -27,6 +27,8 @@ gem 'pry-byebug', group: :development
 gem 'ruby-debug-ide'
 gem 'debase'
 gem 'nokogiri'
+#20191207 google analytics　install
+gem 'google-analytics-rails'
 
 #20191111管理画面追加,認証機能
 gem 'rails_admin', '~> 1.3'

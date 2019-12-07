@@ -50,22 +50,23 @@ class PostsController < ApplicationController
   end
   
   #読み込みエラーが発生したときのみfalse返す
-  def sitecheck(url)
+  #引数はpostオブジェクト
+  def sitecheck(obPost)
     judge=true
 
     begin
         #HTTPEROORが発生した場合のエラー処理
-        url_ob=URI::parse(url.url)
+        url_ob=URI::parse(obPost.url)
         page=url_ob.read("user-agent"=>"aaaa")
         @contents_url = Nokogiri::HTML::parse(page)
-        url.content2=url.content if url.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
-        keyword=url.content
-        keyword2=url.content2                
+        obPost.content2=obPost.content if obPost.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
+        keyword=obPost.content
+        keyword2=obPost.content2                
                   
         if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
-          url.zaiko=false
+          obPost.zaiko=false
         else
-          url.zaiko=true
+          obPost.zaiko=true
         end
     rescue
 
@@ -120,7 +121,7 @@ class PostsController < ApplicationController
                   content2: row['content2'],
                   user_id: @current_user.id)
 
-      if sitecheck(@post.url)
+      if sitecheck(@post)
 
           if @post.save
             
