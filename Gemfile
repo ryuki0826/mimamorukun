@@ -31,7 +31,7 @@ gem 'nokogiri'
 gem 'google-analytics-rails'
 
 #20191111管理画面追加,認証機能
-gem 'rails_admin', '~> 2.0.0'
+gem 'rails_admin'
 gem 'cancancan'
 gem 'devise'
 # Use ActiveStorage variant
