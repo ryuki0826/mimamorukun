@@ -32,7 +32,7 @@ gem 'google-analytics-rails'
 
 #20191111管理画面追加,認証機能
 gem 'rails_admin', '~> 2.0.0'
-gem 'cancancan', '~> 2.0'
+gem 'cancancan'
 gem 'devise'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
