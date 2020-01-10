@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   # post "users/create" => "users#create"
   # get "signup" => "users#new"
   # get "users/index" => "users#index"
-  #get "users/:id" => "users#show"#ユーザー情報画面
+  get "users/upgrade" => "users#upgrade"#ユーザー情報画面
+  get "users/:id" => "users#show"#ユーザー情報画面
+ 
   # post "login" => "users#login"
   # post "logout" => "users#logout"
   # get "login" => "users#login_form"

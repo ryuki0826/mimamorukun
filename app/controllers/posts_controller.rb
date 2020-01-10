@@ -32,9 +32,9 @@ class PostsController < ApplicationController
       content2: params[:content2],
       user_id: @current_user.id
     )
-    #サイト読み取り異常の場合　登録不可のメッセージ追加
-    if sitecheck(@post)
-    
+    #サイト読み取り異常の場合　登録不可のメッセージ追加　サイトチェックをモデルに移動させるとスマートになりそ
+    if sitecheck(@post) 
+      
       if @post.save
         flash[:notice] = "監視サイト登録しました"
         redirect_to("/posts/index")
@@ -44,8 +44,9 @@ class PostsController < ApplicationController
 
     else
 
-      flash[:notice] = "ＵＲＬが不適切かそのサイトからアクセスブロックされているため登録できません"
-      redirect_to("/posts/index")
+      flash[:notice] = "サイト読み込みエラー。登録できませんでした"
+      render("posts/new")
+      # redirect_to("/posts/new")
     end
   end
   
@@ -114,7 +115,8 @@ class PostsController < ApplicationController
   def import
 
     # Post.import(params[:file])
-    err_url=""
+    err_save_url=""
+    err_access_url=""
     CSV.foreach(params[:file].path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
       @post=Post.new(url: row['url'],
                   content: row['content'],
@@ -126,7 +128,7 @@ class PostsController < ApplicationController
           if @post.save
             
           else
-            err_url=err_url + @post.url + "\n"
+            err_save_url=err_save_url + @post.url + "\n"
           end
 
           # flash[:notice] = "監視サイト登録しました"
@@ -136,7 +138,7 @@ class PostsController < ApplicationController
         # end
       else
   
-          err_url=err_url + @post.url + "\n"
+        err_access_url=err_access_url + @post.url + "\n"
         
         # redirect_to("/posts/index")
       end
@@ -144,13 +146,29 @@ class PostsController < ApplicationController
 
       # post.save!
     end
-    
-    if err_url == ""
+    # 最終チェック
+    if err_save_url == "" and err_access_url==""
       flash[:notice] = "登録完了しました"
-    else
-      flash[:notice] = "#{err_url}においてＵＲＬ,キーワードが不適切かそのサイトからアクセスブロックされているため登録できませんでした"
+      redirect_to("/posts/index")
+    elsif err_access_url != ""
+      flash[:notice] ="#{err_access_url}においてサイト読み込みエラー。登録できませんでした"
+      render("posts/new")
+    # elsif err_save_url <>"" and err_access_url ==""
+    # elsif err_save_url =="" and err_access_url <> ""
+    #   # flash[:notice] = 
+    #   # redirect_to("/posts/index")
+    #   errors.add(:post, "#{err_access_url}においてサイト読み込みエラー。登録できませんでした")
+    # elsif err_save_url <>"" and err_access_url ==""
+     else
+      render("posts/new")
+    # else
+    #   errors.add(:post, "#{err_access_url}においてサイト読み込みエラー。登録できませんでした")
     end
-     redirect_to("/posts/index")
+    
+    # else
+    #   flash[:notice] = "#{err_url}においてサイト読み込みエラー。登録できませんでした"
+    # end
+    #  redirect_to("/posts/index")
   end
 
   def download

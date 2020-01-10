@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   #   @users = User.all
   # end
   
-  # def show
-  #   @user = User.find_by(id: params[:id])
-  # end
+  def show
+    @user = User.find_by(id: params[:id])
+    @allpostsnumber = Post.where(user_id: params[:id]).count
+  end
   
+  def upgrade
+  end
   # def new
   #   @user = User.new
   # end
@@ -92,5 +95,39 @@ class UsersController < ApplicationController
       redirect_to("/posts/index")
     end
   end
+
+  def convert_account(accountnumber)
+    if accountnumber == 0
+      "フリー"
+    elsif accountnumber == 1
+      "スターター"
+    elsif accountnumber == 2
+      "スタンダード"
+    elsif accountnumber == 3
+      "プロフェッショナル"
+    else
+      ""
+    end
+  end
+
+  def convert_kanshimax(accountnumber)
+    if accountnumber == 0
+      20  
+    elsif accountnumber == 1
+      100
+    elsif accountnumber == 2
+      300
+    elsif accountnumber == 3
+      1000
+    else
+      ""
+    end
+  end
+
+
+
+
+  helper_method :convert_kanshimax
+  helper_method :convert_account
   
 end

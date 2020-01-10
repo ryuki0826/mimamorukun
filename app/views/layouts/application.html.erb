@@ -7,11 +7,12 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- BootstrapのCSS読み込み -->
     <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
      -->
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Google Analystics -->
     <%= analytics_init if Rails.env.production? %>
 
@@ -28,9 +29,9 @@
       </div>
       <ul class="header-menus">
         <% if  user_signed_in?%>  
-          <!--<li>
-            <%= link_to(current_user.id, "/users/#{current_user.id}") %>
-          </li>-->
+          <li>
+            <%= link_to("アカウント情報", "/users/#{current_user.id}") %>
+          </li>
           
           <li>
             <%= link_to("監視サイト一覧", "/posts/index") %>
@@ -45,9 +46,10 @@
           <li>
             <%= link_to("ログアウト","/users/sign_out") %>
           </li>
-          <li>
+          <!--<li>
             <%= link_to("管理人からのメッセージ","/voice") %>
           </li>
+          -->
         <% else %>
           <li>
             <%= link_to("みまもるくんとは", "/about") %>

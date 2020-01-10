@@ -1,14 +1,15 @@
 <div class="main posts-new">
   <div class="container">
-    <h1 class="form-heading">個別登録</h1>
-    <%= form_tag("/posts/create") do %>
-      <div class="form">
-        <div class="form-body">
-          <% @post.errors.full_messages.each do |message| %>
+     <% @post.errors.full_messages.each do |message| %>
             <div class="form-error">
               <%= message %>
             </div>
           <% end %>
+    <h1 class="form-heading">個別登録</h1>
+    <%= form_tag("/posts/create") do %>
+      <div class="form">
+        <div class="form-body">
+         
           
           <p>サイトURL</p>
           <input name="url" value="<%= @post.url %>">
