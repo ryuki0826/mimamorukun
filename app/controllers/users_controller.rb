@@ -97,7 +97,7 @@ class UsersController < ApplicationController
   end
 
   def convert_account(accountnumber)
-    if accountnumber == 0
+    if accountnumber == 0 or accountnumber.blank?
       "フリー"
     elsif accountnumber == 1
       "スターター"
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def convert_kanshimax(accountnumber)
-    if accountnumber == 0
+    if accountnumber == 0 or accountnumber.blank?
       20  
     elsif accountnumber == 1
       100
