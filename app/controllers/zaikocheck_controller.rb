@@ -76,7 +76,7 @@ class ZaikocheckController < ApplicationController
         
 
         
-            if error_text_url=""
+            if error_text_url==""
                 return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n" 
             else
                 return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n"+ "在庫確認時、以下のサイトで通信エラー発生しております。在庫状況確認お願いします。\n#{error_text_url}"
