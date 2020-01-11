@@ -12,6 +12,7 @@ class ZaikocheckController < ApplicationController
            
         
             text_url= ""
+            error_text_url=""
             i=0
         
             urls.each do |url|
@@ -28,28 +29,44 @@ class ZaikocheckController < ApplicationController
                     page=url_ob.read("user-agent"=>"aaaa")
                     @contents_url = Nokogiri::HTML::parse(page)
                 rescue
-                    
-
+                    error_text_url << url.url
+                    error_text_url << "\n"
                     next
                 end
                     
                 
                     #@contents_url = Nokogiri::HTML(open(url.url),nil,"utf-8")
-                
+                #キーワード発生⇒url.zaiko=false　保存できなかったらerror_text_urlにURL入力
                 if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
                     url.zaiko=false
-                    text_url << url.url
-                    text_url << "\n"
-                    i+=1
+                    #保存OK⇒text_url 保存NG⇒error_text_url
+                    if url.save
+                        text_url << url.url
+                        text_url << "\n"
+                        i+=1
+                    else
+                        error_text_url << url.url
+                        error_text_url << "\n"
+                        
+                    end
+
+                   
                 else
                     url.zaiko=true
+                    url.save
                 end
 
+                # if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
+                #     url.zaiko=false
+                #     text_url << url.url
+                #     text_url << "\n"
+                #     i+=1
+                # else
+                #     url.zaiko=true
+                # end
+
                 #変更内容を更新
-                if url.save
-                else
-                    p url.url
-                end
+                
            
             end
 
@@ -59,9 +76,11 @@ class ZaikocheckController < ApplicationController
         
 
         
-
-            return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n" 
-        
+            if error_text_url=""
+                return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n" 
+            else
+                return "#{i}件のウェブサイトでキーワードが発生しております\n#{text_url}"+"\n"+ "在庫確認時、以下のサイトで通信エラー発生しております。在庫状況確認お願いします。\n#{error_text_url}"
+            end
 
     end
 
