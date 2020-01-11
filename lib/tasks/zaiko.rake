@@ -20,7 +20,7 @@ namespace :zaiko do
 
     task test: :environment do
     
-        users = User.find_by(id:6)
+        user = User.find_by(id:6)
         zaikocheck=ZaikocheckController.new
         
         # users.each do |user|#ユーザー全員について繰り返し
