@@ -32,6 +32,7 @@ class PostsController < ApplicationController
       content2: params[:content2],
       user_id: @current_user.id
     )
+   
     #サイト読み取り異常の場合　登録不可のメッセージ追加　サイトチェックをモデルに移動させるとスマートになりそ
     if sitecheck(@post) 
       
