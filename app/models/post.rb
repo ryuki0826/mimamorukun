@@ -22,12 +22,12 @@ class Post < ApplicationRecord
 
  def check_number_of_posts
   if user.account == 0 or user.account.blank? && user.posts.size >19
-   errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-  elsif user.account == 1 && user.posts.size >99
-   errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-  elsif user.account == 2 && user.posts.size >299
-    errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-  elsif user.account == 3 && user.posts.size >999
+   errors.add(:post, "登録上限を超えています。「アカウント情報」を確認してください。")
+  # elsif user.account == 1 && user.posts.size >99
+  #  errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
+  # elsif user.account == 2 && user.posts.size >299
+  #   errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
+  elsif user.posts.size >499
       errors.add(:post, "登録上限を超えています。")
   else  
   
