@@ -12,6 +12,14 @@ class PostsController < ApplicationController
     #@posts = Post.all.order(created_at: :desc)
     @posts = Post.all.order(created_at: :desc)
     @posts=Post.where(user_id: @current_user.id)
+
+    respond_to do |format|
+      format.html 
+       
+      format.csv do
+        send_data render_to_string, filename: "posts.csv", type: :csv
+      end
+    end
   end
   
   # def show
