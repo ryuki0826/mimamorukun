@@ -4,7 +4,7 @@
  
      <div class="col-12">
              <button type="button" class="btn btn-outline-success"> <%= link_to "監視サイト一覧csv出力",posts_index_url(format: :csv) %></button>
-
+             <button type="button" class="btn btn-outline-success"><%= link_to("在庫切れサイト一括削除", "/posts/destroyall", {method: "post"}) %></button>
      <div class="card">
             <div class="card-header">監視サイト一覧</div>
         <table class="table table-bordered">

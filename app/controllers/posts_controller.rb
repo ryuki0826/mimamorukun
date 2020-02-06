@@ -114,6 +114,13 @@ class PostsController < ApplicationController
     flash[:notice] = "監視登録を削除しました"
     redirect_to("/posts/index")
   end
+
+  def destroyall
+    @posts =Post.where(zaiko: false)
+    @posts.destroy_all
+    flash[:notice] = "在庫切れのサイトの監視登録を全て削除しました"
+    redirect_to("/posts/index")
+  end
   
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
