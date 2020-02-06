@@ -187,9 +187,9 @@ class PostsController < ApplicationController
 
   def convert(flag)
     if flag
-      "なし"
-    else
       "あり"
+    else
+      "なし"
     end
   end
 

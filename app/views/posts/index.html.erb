@@ -3,8 +3,7 @@
   <div class="container">
  
      <div class="col-12">
-
-            <%= link_to "csv出力",posts_index_url(format: :csv) %>
+             <button type="button" class="btn btn-outline-success"> <%= link_to "監視サイト一覧csv出力",posts_index_url(format: :csv) %></button>
 
      <div class="card">
             <div class="card-header">監視サイト一覧</div>
@@ -12,9 +11,10 @@
             <thead class="thead-light">
                 <tr>
                     <th>URL</th>
-                    <th>キーワード</th>
-                    <th>キーワード2</th>
-                     <th>キーワード発生状況</th>
+                    <th>在庫切れキーワード1</th>
+                    <th>在庫切れキーワード2</th>
+                    <th>在庫状況</th>
+                    <th>備考</th>
                     <th>編集</th>
                     <th>削除</th>
                 </tr>
@@ -26,8 +26,10 @@
                     <td><%=post.content.truncate(50)%></td>
                     <td><%=post.content2.truncate(50)%></td>
                     <td><%=convert(post.zaiko)%></td> 
+                    <td><%=post.option%></td> 
                     <td><%=link_to("編集", "/posts/#{post.id}/edit")%></td>
                     <td> <%= link_to("削除", "/posts/#{post.id}/destroy", {method: "post"}) %></td>
+                    
       </tr>
     <% end %>
             </tbody>
