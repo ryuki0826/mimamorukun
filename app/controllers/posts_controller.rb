@@ -38,6 +38,7 @@ class PostsController < ApplicationController
       url: params[:url],
       content: params[:content],
       content2: params[:content2],
+      option: row['option'],
       user_id: @current_user.id
     )
    
@@ -98,6 +99,7 @@ class PostsController < ApplicationController
     @post.content = params[:content]
     @post.content2 = params[:content2]
     @post.url= params[:url]
+    @post.option=params[:option]
     if @post.save
       flash[:notice] = "監視サイト情報を編集しました"
       redirect_to("/posts/index")
@@ -130,6 +132,7 @@ class PostsController < ApplicationController
       @post=Post.new(url: row['url'],
                   content: row['content'],
                   content2: row['content2'],
+                  option: row['option'],
                   user_id: @current_user.id)
 
       if sitecheck(@post)
