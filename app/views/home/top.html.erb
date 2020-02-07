@@ -1,7 +1,155 @@
 <div class="main top-main">
   <div class="top-message">
-    <h2>在庫管理から<br>あなたを解放します</h2>
-    <p>メールでかんたん登録。</p>
-    <%= image_tag '/assets/top.png' %>
+    <h2>面倒な在庫管理は<br>AIに任せよう</h2>
+    <p>自動在庫管理システムみまもるくん</p>
+   <!-- <%= image_tag '/assets/top.png' %>-->
   </div>
+
+  <div class="about-main">
+
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">
+            <div class="balloon2" style="height: 66px;"><span>仕入れ元の在庫管理が大変！つらいぜ</span></div>
+                <%= image_tag '/assets/problem1.jpg' %>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+            <div class="balloon2" style="height: 66px;"><span>ハハハハハ。やばい在庫管理ミスっちまった。</span></div>
+                <%= image_tag '/assets/problem2.jpg' %>
+        </div>
+         <div class="col-xs-12 col-lg-4">
+            <div class="balloon2" style="height: 66px;"><span>もっとたくさん出品して稼ぎたいわ。でも、在庫管理大変なるわね。</span></div>
+                <%= image_tag '/assets/problem3.jpg' %>
+        </div>
+
+        
+    </div>
+</div>
+
+    <div class=hopeBox>
+		<div class="titleBox">みまもるくんに、<br class="spBr">お任せあれ！</div>
+    </div>
+
+  <div class="subTitle1">
+				<p>みまもるくんとは？</p>
+				<h3 class="titleText">無在庫転売屋さん必須の<span class="colorRed">自動在庫管理システム</span>です
+			</h3></div>
+
+  <article class="benefit">
+  <ul>
+    <li>AIロボットが1日2回仕入れ先の在庫状況を自動確認&報告</li>
+    <li>転売屋経験のあるエンジニアが開発。だから転売屋目線のうれしい機能が満載</li>
+　</ul>
+  </article>
+  
+  <h2>機能紹介</h2>
+  <h3>CSVによる一括登録</h3>
+  <%= image_tag '/assets/torokugamen.PNG' %>
+  <p>サイトの登録には、直接入力する個別登録とCSVをアップロードする一括登録の2種類あります。CSVを利用すれば、大量登録も楽にできます。</p>
+  <br>
+  <h3>メールによる定期通知</h3>
+  <%= image_tag '/assets/mail.PNG' %>
+  <p>登録したサイトのキーワード発生状況を定期的にメールで通知するので、自分でサイトを監視する必要がなくなります。今後LINEによる通知など機能拡大を予定しています。</p>
+  <br>
+  <h3>監視状況が一目でわかる管理画面</h3>
+  <%= image_tag '/assets/ichiran.PNG' %>
+  <p>監視サイトの管理、編集も簡単にできます。</p>
+<%# </div> %>
+  <h3>その他機能</h3>
+  <p>監視中サイト情報csvダウンロードや在庫切れサイトの一括削除機能など地味に便利な機能が満載</p>
+<%# <div class="container"> %>
+    
+ <h2>対応サイト</h2>
+    <table class="table table-bordered table-striped">
+            <thead >
+                <tr class="table-light">
+                    <th>サイト名</th>
+                    <th>キーワード例</th>                    
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="table-light">
+                    <td >ヤフオク</td>
+                    <td>終了</td>
+              　</tr>
+
+                <tr class="table-light">
+                    <td >ヤフーショッピング</td>
+                    <td>現在売り切れです</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td >ラクマ</td>
+                    <td>SOLD OUT,こちらの商品の掲載は終了しました</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td >アマゾン</td>
+                    <td>この商品は現在お取り扱いできません</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td >楽天</td>
+                    <td>売り切れました</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td >駿河屋</td>
+                    <td>申し訳ございません。品切れ中です。</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td >オタマート</td>
+                    <td>売り切れました</td>
+              　</tr>
+
+              <tr class="table-light">
+                    <td >eBay</td>
+                    <td>This listing has ended.	</td>
+              　</tr>
+
+    
+            </tbody>
+    </table>
+
+
+<p>メルカリ、ビックカメラは対象外サイトとなります。ご了承ください。</p>
+<p>主要なECサイトの一括在庫管理ができます。以上のサイト一覧は現時点のものであり、対応サイトは今後拡大予定です。ご希望のサイトございましたら、気軽にお声がけください。優先的に対応します。</p>
+
+
+    <%# <h3>料金体系</h3>
+    <table class="table table-bordered table-striped">
+            <thead >
+                <tr class="table-light">
+                    <th></th>
+                    <th>フリー</th>
+                    <th>スターター</th>
+                     <th>スタンダード</th>
+                    <th>プロフェッショナル</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="table-light">
+                    <td >監視可能サイト数上限</td>
+                    <td>20</td>
+                    <td>100</td>
+                    <td>300</td> 
+                    <td>1000</td>
+              　</tr>
+
+               <tr class="table-light">
+                    <td  >月額料金(円)</td>
+                    <td>0</td>
+                    <td>500</td>
+                    <td>1000</td> 
+                    <td>2000</td>
+              　</tr>
+    
+            </tbody>
+    </table>
+     <p>監視可能サイト数上限に基づく料金体系となっており、無駄なく必要な分だけご利用いただけます。</p> %>
+</div>
 </div>
