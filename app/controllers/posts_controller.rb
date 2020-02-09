@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       url: params[:url],
       content: params[:content],
       content2: params[:content2],
-      option: row['option'],
+      option: params[:option],
       user_id: @current_user.id
     )
    
