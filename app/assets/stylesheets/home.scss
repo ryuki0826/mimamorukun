@@ -292,6 +292,30 @@ ul li:last-of-type {
   width: 84%;
 }
 
+.bottomFixBtn{
+
+  position: fixed;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -145px;
+    z-index: 9999;
+
+}
+
+.btnStyle1 {
+  display: block;
+  // background: #e04f51;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
 /* フォーム================================ */
 .form {
   max-width: 600px;
