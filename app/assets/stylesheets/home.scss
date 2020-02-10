@@ -22,7 +22,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
+  margin-bottom: 1rem;
 }
 
 input {
@@ -203,9 +203,13 @@ header {
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center center;
+}
 
-
-
+.happyBox {
+  background: image-url('happy.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .titleBox {
@@ -223,7 +227,7 @@ header {
 .spBr {
   display: none;
 }
-.hopeBox {
+.hopeBox, .happyBox {
 
   padding-top: 80px;
   padding-bottom: 80px;
@@ -239,8 +243,13 @@ header {
   padding-bottom: 60px;
 }
 
-.benefit ul {
+.benefit {
   font-size: 40px;
+  text-align: center;
+
+}
+
+.benefit ul {
   border: solid 2px #ffb03f;
   padding: 0 0.5em;
   position: relative;
@@ -314,6 +323,59 @@ ul li:last-of-type {
   text-decoration: none;
   border-radius: 5px;
   font-size: 1.5rem;
+}
+
+/* 矢印================================右下上左*/
+
+.arrow{
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color: #565656 #565656 transparent transparent;
+  transform: rotate(45deg);
+}
+.arrow1{
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color:  transparent transparent #565656 #565656;
+  transform: rotate(-45deg);
+  margin:0 auto
+}
+.arrow2{
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color: #565656 #565656 transparent transparent;
+  transform: rotate(-45deg);
+}
+.arrow3{
+  width: 30px;
+  height: 30px;
+  border: 5px solid;
+  border-color:  transparent transparent rgba(247, 177, 26, 0.849);
+  transform: rotate(45deg);
+}    
+/* 蛍光ペンで下線を引く================================ */
+.under {
+  background: linear-gradient(transparent 0, yellow 0);
+}
+/* 実線を引く================================ */
+
+.under-solid{
+  border-bottom: solid 2px gray;
+}
+
+
+
+.abstract, .urlList, .funcList {
+font-size: 1.5rem;
+
+}
+
+.urlList, .funcList{
+text-align: center;
+
 }
 
 /* フォーム================================ */
