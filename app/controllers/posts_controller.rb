@@ -28,12 +28,19 @@ class PostsController < ApplicationController
   #   @likes_count = Like.where(post_id: @post.id).count
   # end
   
+  
+
   def new
     @post = Post.new
    
   end
   
   def create
+
+      if !check_number_of_posts  then
+        redirect_to("/users/show") and return
+      end
+
     @post = Post.new(
       url: params[:url],
       content: params[:content],
@@ -41,53 +48,23 @@ class PostsController < ApplicationController
       option: params[:option],
       user_id: @current_user.id
     )
-   
+    
     #サイト読み取り異常の場合　登録不可のメッセージ追加　サイトチェックをモデルに移動させるとスマートになりそ
-    if sitecheck(@post) 
-      
-      if @post.save
-        flash[:notice] = "監視サイト登録しました"
-        redirect_to("/posts/index")
-      else
-        render("posts/new")
-      end
-
-    else
-
+    if !@post.sitecheck then 
       flash[:notice] = "サイト読み込みエラー。登録できませんでした"
-      render("posts/new")
-      # redirect_to("/posts/new")
+      redirect_to("/posts/index") and return
     end
+    
+    if @post.save
+      flash[:notice] = "監視サイト登録しました"  
+    else  
+      flash[:notice] = "システムエラー管理人までご連絡ください"           
+    end
+
+      # redirect_to("/posts/new")
+    
   end
   
-  #読み込みエラーが発生したときのみfalse返す
-  #引数はpostオブジェクト
-  def sitecheck(obPost)
-    judge=true
-
-    begin
-        #HTTPEROORが発生した場合のエラー処理
-        url_ob=URI::parse(obPost.url)
-        page=url_ob.read("user-agent"=>"aaaa")
-        @contents_url = Nokogiri::HTML::parse(page)
-        obPost.content2=obPost.content if obPost.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
-        keyword=obPost.content
-        keyword2=obPost.content2                
-                  
-        if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
-          obPost.zaiko=false
-        else
-          obPost.zaiko=true
-        end
-    rescue
-
-      judge=false
-    end
-
-    return judge
-
-
-  end
   
   def edit
     @post = Post.find_by(id: params[:id])
@@ -131,63 +108,37 @@ class PostsController < ApplicationController
   end
 
   def import
-
-    # Post.import(params[:file])
     err_save_url=""
     err_access_url=""
     CSV.foreach(params[:file].path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      
+      if !check_number_of_posts  then
+        redirect_to("/users/show") and return
+      end
+
       @post=Post.new(url: row['url'],
                   content: row['content'],
                   content2: row['content2'],
                   option: row['option'],
                   user_id: @current_user.id)
-
-      if sitecheck(@post)
-
-          if @post.save
-            
-          else
-            err_save_url=err_save_url + @post.url + "\n"
-          end
-
-          # flash[:notice] = "監視サイト登録しました"
-          # redirect_to("/posts/index")
-        # else
-        #   # render("posts/new")
-        # end
-      else
-  
-        err_access_url=err_access_url + @post.url + "\n"
-        
-        # redirect_to("/posts/index")
+      #サイトアクセス可能か判定
+      if !@post.sitecheck then 
+        err_access_url=err_access_url + @post.url.to_s + "\n"
       end
-      # post.attributes = row.to_hash.slice(*updatable_attributes)
-
-      # post.save!
+      
+      if !@post.save　then 
+        err_save_url=err_save_url + @post.url.to_s + "\n"          
+      end
+     
+      # 最終チェック
+      if err_save_url == "" and err_access_url==""
+        flash[:notice] = "登録完了しました"
+        redirect_to("/posts/index")
+      elsif err_access_url != "" or err_save_url != ""
+        flash[:notice] ="#{err_access_url}#{err_save_url}登録できませんでした"
+        render("posts/new")
+      end
     end
-    # 最終チェック
-    if err_save_url == "" and err_access_url==""
-      flash[:notice] = "登録完了しました"
-      redirect_to("/posts/index")
-    elsif err_access_url != ""
-      flash[:notice] ="#{err_access_url}においてサイト読み込みエラー。登録できませんでした"
-      render("posts/new")
-    # elsif err_save_url <>"" and err_access_url ==""
-    # elsif err_save_url =="" and err_access_url <> ""
-    #   # flash[:notice] = 
-    #   # redirect_to("/posts/index")
-    #   errors.add(:post, "#{err_access_url}においてサイト読み込みエラー。登録できませんでした")
-    # elsif err_save_url <>"" and err_access_url ==""
-     else
-      render("posts/new")
-    # else
-    #   errors.add(:post, "#{err_access_url}においてサイト読み込みエラー。登録できませんでした")
-    end
-    
-    # else
-    #   flash[:notice] = "#{err_url}においてサイト読み込みエラー。登録できませんでした"
-    # end
-    #  redirect_to("/posts/index")
   end
 
   def download

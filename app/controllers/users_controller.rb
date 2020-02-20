@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   # end
   
   def show
-    @user = User.find_by(id: params[:id])
-    @allpostsnumber = Post.where(user_id: params[:id]).count
+    @allpostsnumber = Post.where(user_id: current_user.id).count
   end
-  
+
+
   def upgrade
   end
   # def new
@@ -123,6 +123,8 @@ class UsersController < ApplicationController
       ""
     end
   end
+
+
 
 
 

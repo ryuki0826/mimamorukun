@@ -2,36 +2,12 @@
   <div class="container">
     <div class="user">
       <h2>登録メールアドレス</h2>
-      <p><%= @user.email %></p>
+      <p><%= current_user.email %></p>
       <h2>アカウントランク</h2>
-      <p><%= convert_account(@user.account) %></p>
+      <p><%= convert_account(current_user.account) %></p>
       <p><%= link_to("アップグレード", "/users/upgrade") %></p>
       <h2>監視中サイト数</h2>
-      <p><%= @allpostsnumber %>/<%= convert_kanshimax(@user.account) %></p>
-    
-      
-      <!--<% if @user.id == current_user.id %>
-        <%= link_to("編集", "/users/#{@user.id}/edit") %>
-      <% end %>-->
+      <p><%= @allpostsnumber %>/<%= convert_kanshimax(current_user.account) %></p>
     </div>
-    
-    <!--<ul class="user-tabs">
-      <li class="active"><%= link_to("投稿", "/users/#{@user.id}") %></li>
-      <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-    </ul>
-    
-    <% @user.posts.each do |post| %>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <img src="<%= "/user_images/#{post.user.image_name}" %>">
-        </div>
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= link_to(post.user.name, "/users/#{post.user.id}") %>
-          </div>
-          <%= link_to(post.content, "/posts/#{post.id}") %>
-        </div>
-      </div>
-    <% end %> -->
   </div>
 </div>

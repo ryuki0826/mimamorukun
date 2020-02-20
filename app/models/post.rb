@@ -11,7 +11,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
- validate :check_number_of_posts
+#  validate :check_number_of_posts
 
 #  def check_number_of_posts on: :new
 #   if user.account == 3 && user.posts.size >14
@@ -20,19 +20,33 @@ class Post < ApplicationRecord
 #   end
 #  end
 
- def check_number_of_posts
-  if user.account == 0 or user.account.blank? && user.posts.size >19
-   errors.add(:post, "登録上限を超えています。「アカウント情報」を確認してください。")
-  # elsif user.account == 1 && user.posts.size >99
-  #  errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-  # elsif user.account == 2 && user.posts.size >299
-  #   errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-  elsif user.posts.size >499
-      errors.add(:post, "登録上限を超えています。")
-  else  
-  
+
+ #サイトへアクセス可能か判断し、true,false返す。可能なら在庫確認もする。
+ def sitecheck
+  judge=true
+  begin
+      #HTTPEROORが発生した場合のエラー処理
+      url_ob=URI::parse(self.url)
+      page=url_ob.read("user-agent"=>"aaaa")
+      @contents_url = Nokogiri::HTML::parse(page)
+      self.content2=self.content if self.content2.blank? #複数キーワード対応　もっと良い方法ありそう 20191126修正　blank?利用(nil, "", " ", [], {} のいずれかでTrueを返す。)
+      keyword=self.content
+      keyword2=self.content2                
+                
+      if @contents_url.content.include?(keyword) or @contents_url.content.include?(keyword2) 
+        self.zaiko=false
+      else
+        self.zaiko=true
+      end
+  rescue
+
+    judge=false
   end
- end
+
+  return judge
+
+
+end
 
   # def self.import(file)
   #   CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
