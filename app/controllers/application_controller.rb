@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   #ポストがアカウント上限以内かどうか確認。上限以内true 。上限オーバーfalse返す
 def check_number_of_posts
 
-  if (current_user.account ==0  or current_user.account.blank?) && current_user.posts.size >4
+  if (current_user.account ==0  or current_user.account.blank?) && current_user.posts.size >9
       flash[:notice] = "登録上限を超えています。さらなる利用にはアカウントのアップグレードが必要です。"
       return false
   elsif current_user.posts.size >499
