@@ -112,7 +112,7 @@ class UsersController < ApplicationController
 
   def convert_kanshimax(accountnumber)
     if accountnumber == 0 or accountnumber.blank?
-      20  
+      5  
     elsif accountnumber == 1
       100
     elsif accountnumber == 2
