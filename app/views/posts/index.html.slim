@@ -1,0 +1,44 @@
+.main.posts-index
+  .container
+    .col-12
+      button.btn.btn-outline-success[type="button"]
+        = link_to "監視サイト一覧csv出力",posts_index_url(format: :csv)
+      button.btn.btn-outline-success[type="button"]
+        = link_to("在庫切れサイト一括削除", "/posts/destroyall", {method: "post"})
+      .card
+        .card-header
+          | 監視サイト一覧
+        table.table.table-bordered
+          thead.thead-light
+            tr
+              th
+                | URL
+              th
+                | 在庫切れキーワード1
+              th
+                | 在庫切れキーワード2
+              th
+                | 在庫状況
+              th
+                | 備考
+              th
+                | 編集
+              th
+                | 削除
+          tbody
+            - @posts.each do |post|
+              tr
+                td
+                  =text_url_to_link(post.url).html_safe
+                td
+                  =post.content.truncate(50)
+                td
+                  =post.content2.truncate(50)
+                td
+                  =convert(post.zaiko)
+                td
+                  =post.option
+                td
+                  =link_to("編集", "/posts/#{post.id}/edit")
+                td
+                  = link_to("削除", "/posts/#{post.id}/destroy", {method: "post"})

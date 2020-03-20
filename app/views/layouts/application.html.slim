@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title
+      | 無在庫転売屋さん向け　自動在庫管理システムみまもるくん
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    link[rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"]
+    link[rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"]
+    = analytics_init if Rails.env.production?
+    meta[name="google-site-verification" content="_IEDyBg4Tk0s15k4o1Pr3bRGnq9gRJcTX7Kr2M5iHGQ"]
+  body
+    header
+      .header-logo
+        - if user_signed_in?
+          = link_to("みまもるくん", "/posts/index")
+        - else
+          = link_to("みまもるくん", "/")
+      ul.header-menus
+        - if  user_signed_in?
+          li
+            = link_to("アカウント情報", "/users/#{current_user.id}")
+          li
+            = link_to("監視サイト一覧", "/posts/index")
+          li
+            = link_to("監視サイト登録", "/posts/new")
+          li
+            = link_to("ログアウト","/users/sign_out")
+        - else
+          li
+            = link_to("無料で使ってみる", "/users/sign_up")
+          li
+            = link_to("ログイン", "/users/sign_in")
+    - if flash[:notice]
+      .flash
+        = flash[:notice]
+    = yield

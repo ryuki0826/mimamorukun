@@ -1,0 +1,28 @@
+.main.users-new
+  .container
+    .form-heading
+      | 新規ユーザー登録
+    .form.users-form
+      .form-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = render "devise/shared/error_messages", resource: resource
+          .field
+            = f.label :メール
+            br
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+          .field
+            = f.label :パスワード
+            - if @minimum_password_length
+              em
+                | (
+                = @minimum_password_length
+                |  文字以上)
+            br
+            = f.password_field :password, autocomplete: "new-password"
+          .field
+            = f.label :確認用パスワード
+            br
+            = f.password_field :password_confirmation, autocomplete: "new-password"
+          .actions
+            = f.submit "新規登録"
+        = render "users/shared/links"

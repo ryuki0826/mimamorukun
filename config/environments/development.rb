@@ -69,7 +69,11 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
-
+  
+  #cloud9利用設定　ホワイトリスト追加
+   config.web_console.whitelisted_ips = '217.178.24.171'
+  
+  
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

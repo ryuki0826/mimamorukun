@@ -1,0 +1,128 @@
+.main.top-main
+  .bottomFixBtn.btn-primary.shake.animated
+    = link_to(">> 無料で使ってみる", "/users/sign_up",class: "btnStyle1")
+  .top-message
+    h2
+      | 面倒な在庫管理は
+      br
+      | ロボットに任せよう
+    p
+      | 自動在庫管理システムみまもるくん
+  .about-main
+    .container
+      .row
+        .col-xs-12.col-lg-4
+          .balloon2[style="height: 66px;"]
+            span
+              | 在庫管理に時間がかかる
+          = image_tag '/assets/problem1.jpg'
+        .col-xs-12.col-lg-4
+          .balloon2[style="height: 66px;"]
+            span
+              | 在庫管理を失敗して、大損害
+          = image_tag '/assets/problem2.jpg'
+        .col-xs-12.col-lg-4
+          .balloon2[style="height: 66px;"]
+            span
+              | たくさん出品して稼ぎたい
+          = image_tag '/assets/problem3.jpg'
+    .hopeBox
+      .titleBox
+        | みまもるくんに、
+        br.spBr
+        | お任せあれ！
+    .subTitle1
+      p
+        | みまもるくんとは？
+      h3.titleText.under.my-4
+        | 手間のかかる在庫管理を楽にする無在庫転売屋さん必須の
+        span.colorRed
+          | 自動在庫管理システム
+        | です
+      - # <p>どのように実現するのか？</p>
+      .arrow1
+      .arrow1
+      .arrow1
+    article.benefit
+      ul
+        li
+          | ロボットが1日2回仕入れ先の在庫状況を自動確認&報告
+        li
+          | 幅広いECサイトへ対応！！シンプルな在庫管理アルゴリズム
+        li
+          | 転売屋目線開発！！うれしい機能、使いやすい操作画面
+        |  　
+      .arrow1
+      .arrow1
+      .arrow1
+      .under.my-4
+        | だからこれまで大変だった在庫管理が劇的に楽になります 
+    - # <h2>どのように実現するのか？</h2>
+    h2.under-solid
+      | 使用イメージ
+    = image_tag '/assets/matrix.png',class: "img-thumbnail"
+    ul.abstract
+      li
+        | 1監視依頼:サイトのURLと在庫切れ時に画面上に発生するキーワードを登録します。この時、同時に備考欄に出品先IDなどを登録することもできます。CSVアップロードによる大量登録も可能です。
+      li
+        | 2監視:ECサイトで在庫切れが発生していないか監視します。
+      li
+        | 3在庫状況の報告:在庫切れや監視エラーが発生の有無を1日2回報告します。現時点ではメールのみ対応ですが、LINEでの通知可能へと対応予定です。
+      li
+        | 4その後の対応:在庫切れが生じていた場合には出品先での出品取り消しはご自身で行っていただくこととなります。ただし、監視サイト情報CSVダウンロード機能を用いることで、出品取り消しに必要なCSVファイル等を手間なく作成することができます。
+      |  　
+    p
+      | 【利用動画】
+    iframe[width="560" height="315" src="https://www.youtube.com/embed/6sZiHQhKpQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
+    h2.under-solid
+      | 対応サイト
+    ul.urlList
+      li
+        | ヤフーオークション
+      li
+        | ヤフーショッピング
+      li
+        | ラクマ
+      li
+        | アマゾン
+      li
+        | 楽天
+      li
+        | 駿河屋
+      li
+        | オタマート
+      li
+        | eBay
+      li
+        | などなど
+      |  　
+    p
+      | 主要なECサイトを網羅。対応サイトは今後拡大予定です。ご希望のサイトございましたら、気軽にお声がけください。優先的に対応します。メルカリ、ビックカメラは技術的問題により、対象外サイトとなります。ご了承ください。
+    h2.under-solid
+      | 転売屋目線の開発
+    p
+      | 元せどらープログラマー開発。だから転売屋にとってシンプルで使いやすくかつ効率的にビジネスが行えるように うれしい機能が充実しています。
+    ul.funcList
+      li
+        | CSVによる大量監視登録
+      li
+        | 在庫切れ商品情報一括削除
+      li
+        | 監視サイト情報一覧CSVダウンロード
+      li
+        | 出品先商品情報を記載できる特別備考欄
+      li
+        | 複数の在庫切れパターンを想定した在庫管理アルゴリズム
+      li
+        | などなど
+      |  　
+    h2.under-solid
+      | 最後に
+    p
+      | みまもるくんは転売屋による転売屋のためのシステムです。そして、今後もユーザーの皆様の声とともに成長していきます。
+    .happyBox
+      .titleBox
+        | みまもるくんによって、在庫管理の負担をグッと減らし、より快適な転売生活を送りませんか？
+    p
+      | eBayへの出品作業を劇的に楽にすることに興味がある方は
+      = link_to 'こちら', 'https://wp.me/paRZGm-uT'

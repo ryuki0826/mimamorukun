@@ -1,0 +1,39 @@
+.main.posts-new
+  .container
+    - @post.errors.full_messages.each do |message|
+      .form-error
+        = message
+    h1.form-heading
+      | 個別登録
+    = form_tag("/posts/create") do
+      .form
+        .form-body
+          p
+            | サイトURL
+          |  <input name="url" value="
+          = @post.url
+          | "> 
+          p
+            | 在庫切れキーワード
+          |  <input name="content" value="
+          = @post.content
+          | "> 
+          p
+            | 在庫切れキーワード２
+          |  <input name="content2" value="
+          = @post.content2
+          | "> 
+          p
+            | 備考
+          |  <input name="option" value="
+          = @post.option
+          | "> 
+          input[type="submit" value="登録"]
+    h1.form-heading
+      | 一括登録
+    = form_tag({controller: "posts", action: "import", method: "post"}, {multipart: true}) do
+      .form
+        .form-body
+          = file_field_tag :file
+          = submit_tag "一括登録"
+    = button_to '一括登録用のCSVファイルのダウンロードはこちら', download_path, method: :get, class: "btn btn-default"

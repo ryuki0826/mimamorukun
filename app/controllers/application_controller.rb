@@ -14,6 +14,13 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  # #deviceログイン時実行し、ページ遷移させる
+  # def after_sign_in_path_for(resource)
+  #       flash[:notice] = "ログインできました" 
+  #       posts_index
+  # end
+  
+  #ログイン中の場合にはpost/index画面に強制移動
   def forbid_login_user
     if user_signed_in?
       flash[:notice] = "ログイン中です"

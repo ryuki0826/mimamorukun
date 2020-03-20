@@ -1,0 +1,15 @@
+.main.users-new
+  .container
+    .form-heading
+      | パスワード再発行
+    .form.users-form
+      .form-body
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = render "devise/shared/error_messages", resource: resource
+          .field
+            = f.label :メールアドレス
+            br
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+          .actions
+            = f.submit "再発行"
+        = render "users/shared/links"

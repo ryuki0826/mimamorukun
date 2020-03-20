@@ -1,0 +1,19 @@
+.main.user-show
+  .container
+    .user
+      h2
+        | 登録メールアドレス
+      p
+        = current_user.email
+      h2
+        | アカウントランク
+      p
+        = convert_account(current_user.account)
+      p
+        = link_to("アップグレード", "/users/upgrade")
+      h2
+        | 監視中サイト数
+      p
+        = @allpostsnumber
+        | /
+        = convert_kanshimax(current_user.account)

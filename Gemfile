@@ -34,6 +34,9 @@ gem 'google-analytics-rails'
 gem 'rails_admin'
 gem 'cancancan'
 gem 'devise'
+#2020/03/03
+gem 'slim-rails'
+gem 'html2slim'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

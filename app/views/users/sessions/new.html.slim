@@ -1,0 +1,18 @@
+.main.users-new
+  .container
+    .form-heading
+      | ログイン
+    .form.users-form
+      .form-body
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .field
+            = f.label :メール
+            br
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+          .field
+            = f.label :パスワード
+            br
+            = f.password_field :password, autocomplete: "current-password"
+          .actions
+            = f.submit "ログイン"
+        = render "users/shared/links"
