@@ -2,7 +2,7 @@
   .container
     .col-12
       button.btn.btn-outline-success[type="button"]
-        = link_to "監視サイト一覧csv出力",posts_index_url(format: :csv)
+        = link_to "監視サイト一覧csv出力",posts_url(format: :csv)
       button.btn.btn-outline-success[type="button"]
         = link_to("在庫切れサイト一括削除", "/posts/destroyall", {method: "post"})
       .card

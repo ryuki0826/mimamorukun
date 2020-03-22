@@ -43,15 +43,13 @@ Rails.application.configure do
   domain:               'gmail.com',
   user_name:            'mimamorukunn2@gmail.com',
   password:             'sqidocyruknmlnvi',
-  # user_name:            'ryuki.sato.lol@gmail.com',
-  # password:             'Rukaokun0',
   authentication:       'plain',
   enable_starttls_auto:  true
   }
   #20191115追加　登録時認証メール用
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
-
+  # config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { protocol: 'https', host: 'https://df1fcb9cf9bc4dfb857cf3a70d47562a.vfs.cloud9.us-east-2.amazonaws.com' }
+  
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

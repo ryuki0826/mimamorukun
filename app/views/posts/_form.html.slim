@@ -1,0 +1,19 @@
+   - post.errors.full_messages.each do |message|
+      .form-error
+        = message
+   = form_with model: post, local: true do |f|
+      .form
+        .form-body
+          .form-group
+            =f.label :url
+            =f.text_field :url, class: 'form-controll', id: 'post_url'
+          .form-group
+            =f.label :content
+            =f.text_field :content, class: 'form-controll', id: 'post_content'
+          .form-group
+            =f.label :content2
+            =f.text_field :content2, class: 'form-controll', id: 'post_content2'
+          .form-group
+            =f.label :option
+            =f.text_field :option, class: 'form-controll', id: 'post_option'
+          =f.submit nil, class: 'btn btn-primary'

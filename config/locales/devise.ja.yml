@@ -46,6 +46,9 @@ ja:
         remember_me: "次回から自動的にログイン"
       post:
         content: "キーワード"
+        content2: "キーワード2"
+        url: "商品URL"
+        option: "備考"
     models:
       user: "ユーザ"
   devise:

@@ -1,0 +1,6 @@
+= form_tag({controller: "posts", action: "import", method: "post"}, {multipart: true}) do
+      .form
+        .form-body
+          = file_field_tag :file
+          = submit_tag "一括登録"
+= button_to '一括登録用のCSVファイルのダウンロードはこちら', download_path, method: :get, class: "btn btn-default"

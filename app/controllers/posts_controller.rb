@@ -40,19 +40,13 @@ class PostsController < ApplicationController
       if !check_number_of_posts  then
         redirect_to("/users/show") and return
       end
-
-    @post = Post.new(
-      url: params[:url],
-      content: params[:content],
-      content2: params[:content2],
-      option: params[:option],
-      user_id: @current_user.id
-    )
+    
+    @post = Post.new(post_params.merge(user_id: @current_user.id))
     
     #サイト読み取り異常の場合　登録不可のメッセージ追加　サイトチェックをモデルに移動させるとスマートになりそ
     if !@post.sitecheck then 
       flash[:notice] = "サイト読み込みエラー。登録できませんでした"
-      redirect_to("/posts/index") and return
+      redirect_to(posts_path) and return
     end
     
     if @post.save
@@ -72,14 +66,8 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find_by(id: params[:id])
-
-    @post.content = params[:content]
-    @post.content2 = params[:content2]
-    @post.url= params[:url]
-    @post.option=params[:option]
-    if @post.save
-      flash[:notice] = "監視サイト情報を編集しました"
-      redirect_to("/posts/index")
+    if @post.update(post_params)
+      redirect_to posts_path, notice: "監視サイト情報を編集しました"
     else
       render("posts/edit")
     end
@@ -156,4 +144,7 @@ class PostsController < ApplicationController
 
   helper_method :convert
   
+  def post_params
+    params.require(:post).permit(:url, :content, :content2, :option)
+  end
 end

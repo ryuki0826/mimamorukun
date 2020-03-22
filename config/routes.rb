@@ -20,15 +20,15 @@ Rails.application.routes.draw do
   # get "users/:id/likes" => "users#likes"
   
   #get "posts/scraping" => "posts#scraping"
-  get "posts/index" => "posts#index"
-  get "posts/new" => "posts#new"
+  # get "posts/index" => "posts#index"
+  # get "posts/new" => "posts#new"
   #get "posts/:id" => "posts#show"
-  post "posts/create" => "posts#create"
+  # post "posts/create" => "posts#create"
   post "posts/destroyall" => "posts#destroyall"
-  get "posts/:id/edit" => "posts#edit"
-  post "posts/:id/update" => "posts#update"
-  post "posts/:id/destroy" => "posts#destroy"
-
+  # get "posts/:id/edit" => "posts#edit"
+  # post "posts/:id/update" => "posts#update"
+  # post "posts/:id/destroy" => "posts#destroy"
+  resources :posts, except: :show
    #post で import 処理を許可する
    resources 'posts', only: :import do
     collection { post :import }
