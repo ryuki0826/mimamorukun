@@ -41,7 +41,7 @@ class PostsController < ApplicationController
         redirect_to("/users/show") and return
       end
     
-    @post = Post.new(post_params.merge(user_id: @current_user.id))
+    @post = current_user.posts.new(post_params)
     
     #サイト読み取り異常の場合　登録不可のメッセージ追加　サイトチェックをモデルに移動させるとスマートになりそ
     if !@post.sitecheck then 
