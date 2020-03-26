@@ -14,13 +14,13 @@ html
     header
       .header-logo
         - if user_signed_in?
-          = link_to("みまもるくん", "/posts/index")
+          = link_to("みまもるくん", posts_url)
         - else
           = link_to("みまもるくん", "/")
       ul.header-menus
         - if  user_signed_in?
           li
-            = link_to("アカウント情報", "/users/#{current_user.id}")
+            = link_to("アカウント情報", edit_user_registration_url)
           li
             = link_to("監視サイト一覧", posts_url)
           li

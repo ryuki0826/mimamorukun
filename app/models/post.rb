@@ -4,24 +4,15 @@ class Post < ApplicationRecord
   validates :url, {presence: true}
   validates :user_id, {presence: true}
   
-  # def user
-  #   return User.find_by(id: self.user_id)
-  # end
-
+   #スクレイピング用読み込み
+   require 'nokogiri'
+   require 'open-uri'
 
   belongs_to :user
 
-#  validate :check_number_of_posts
-
-#  def check_number_of_posts on: :new
-#   if user.account == 3 && user.posts.size >14
-#    errors.add(:post, "登録上限を超えています。アカウントをアップグレードしてください。")
-
-#   end
-#  end
 
 
- #サイトへアクセス可能か判断し、true,false返す。可能なら在庫確認もする。
+ #サイトへアクセス可能か確認。可能なら在庫確認もする。
   def sitecheck
     judge=true
     begin
@@ -46,20 +37,30 @@ class Post < ApplicationRecord
     return judge
   end
 
-  # def self.import(file)
-  #   CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+  def self.import(file)
+    
+   err_url = ""
+    
+    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      
+      post= new
+      post.attributes = row.to_hash.slice(*updatable_attributes)
+      
+       #サイトアクセス可能か判定
+      if !post.sitecheck then 
+        err_url=err_url + post.url.to_s + "\n"
+        next
+      end
+      
+      if !post.save then 
+        err_url=err_url + post.url.to_s + "\n"          
+      end
+    end
+    
+    return err_url
+  end
 
-  #     Post.create(url: row['url'],
-  #                 content: row['content'],
-  #                 content2: row['content2'],
-  #                 user_id: @current_user.id)
-  #     # post.attributes = row.to_hash.slice(*updatable_attributes)
-
-  #     # post.save!
-  #   end
-  # end
-
-  # def self.updatable_attributes
-  #   ["url","content","content2"]
-  # end
+  def self.updatable_attributes
+    ["url","content","content2"]
+  end
 end
