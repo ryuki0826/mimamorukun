@@ -14,6 +14,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if current_user.id !=@post.user_id
+      flash[:notice] = "権限がありません"
+      redirect_to(posts_url)
+    end
+  end
+  
   # #deviceログイン時実行し、ページ遷移させる
   # def after_sign_in_path_for(resource)
   #       flash[:notice] = "ログインできました" 
@@ -28,19 +36,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #ポストがアカウント上限以内かどうか確認。上限以内true 。上限オーバーfalse返す
-def check_number_of_posts
-
-  if (current_user.account ==0  or current_user.account.blank?) && current_user.posts.size >9
-      flash[:notice] = "登録上限を超えています。さらなる利用にはアカウントのアップグレードが必要です。"
-      return false
-  elsif current_user.posts.size >499
-      flash[:notice] = "登録上限を超えています。"
-      return false
-  else  
-      return true
+  #ポストがアカウント上限以内かどうか確認。
+  def check_number_of_posts
+    if (current_user.account ==0  or current_user.account.blank?) && current_user.posts.size >9
+      redirect_to edit_user_registration, notice: "登録上限を超えています。さらなる利用にはアカウントのアップグレードが必要です。"
+    elsif current_user.posts.size >499
+      redirect_to edit_user_registration, notice: "登録上限を超えています。"
+    end
   end
-end
 
  
   
